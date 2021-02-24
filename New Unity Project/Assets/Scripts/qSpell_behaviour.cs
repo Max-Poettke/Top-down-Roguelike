@@ -17,7 +17,9 @@ public class qSpell_behaviour : MonoBehaviour
     void Start(){
         Player = GameObject.FindGameObjectWithTag("Player");
         referance = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        referance.x = referance.x + 9f;
         playerReferance = Player.transform.position;
+        playerReferance.x = playerReferance.x + 9f;
         referance.z = playerReferance.z;
         transform.position = playerReferance;
         normalizedDirection = (referance - playerReferance).normalized;

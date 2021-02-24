@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class enemy_behaviour : MonoBehaviour
 {
-    GameObject Player;
+    GameObject PlayerMirror;
     public float speed = 1f;
     private Vector2 target;
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerMirror = GameObject.FindGameObjectWithTag("PlayerMirror");
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class enemy_behaviour : MonoBehaviour
     }
 
     void move(){
-        target = new Vector2(Player.transform.position.x, Player.transform.position.y);
+        target = new Vector2(PlayerMirror.transform.position.x, PlayerMirror.transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
     }
 

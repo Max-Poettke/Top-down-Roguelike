@@ -10,7 +10,7 @@ public class Spawning : MonoBehaviour
     public float spawnRate = 100f;
     public GameObject enemy;
     GameObject Player;
-    public int i = 0;
+    private int i = 0;
     private float radiusX;
     private float radiusY;
 

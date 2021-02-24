@@ -9,6 +9,8 @@ TagManager:
   - Border
   - TeleSplosion
   - Wall
+  - PlayerMirror
+  - HealthBar
   layers:
   - Default
   - TransparentFX

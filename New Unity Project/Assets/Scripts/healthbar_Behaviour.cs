@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class healthbar_Behaviour : MonoBehaviour
 {
     public Slider healthBar;
-    public GameObject Player;
+    public GameObject PlayerMirror;
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerMirror = GameObject.FindGameObjectWithTag("PlayerMirror");
     }
 
     // Update is called once per frame
     void Update()
     {
-     healthBar.value = Player.GetComponent<PlayerMovement>().playerHp;   
+     healthBar.value = PlayerMirror.GetComponent<PlayerMirror_Behaviour>().hp;   
     }
 }

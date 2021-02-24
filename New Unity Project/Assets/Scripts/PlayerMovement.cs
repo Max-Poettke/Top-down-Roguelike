@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
     void spellQ(){
         if (Input.GetKeyDown(KeyCode.Q) && qCoolDown <= 0f){
-            GameObject newSpell = (GameObject)Instantiate (qSpell, new Vector3(rb.position.x, rb.position.y, 0), Quaternion.identity);
+            GameObject newSpell = (GameObject)Instantiate (qSpell, new Vector3(0, 0, 0), Quaternion.identity);
             spellCount ++;
             qCoolDown = 25f;
             castTime = 6f;
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             wCoolDown = 150;
             castTime = 10f;
             for (wOrder = 0; wOrder < 3; wOrder++){
-                GameObject newSpell = (GameObject)Instantiate(wSpell, transform.position, Quaternion.identity);
+                GameObject newSpell = (GameObject)Instantiate(wSpell, new Vector3(transform.position.x + 9f, transform.position.y, transform.position.z), Quaternion.identity);
                 newSpell.GetComponent<wSpell_Behaviour>().wSequence = wOrder;
                 spellCount ++;
             }
@@ -119,12 +119,13 @@ public class PlayerMovement : MonoBehaviour
     Vector3 calculateTarget(Vector3 mousePos){
         target = (mousePos - transform.position).normalized * 5;
         target += transform.position;
+        target.z = 0;
         return target;
     }
 
     void teleSplosion(){
         target = calculateTarget(teleTarget);
-        Instantiate(explosionPrefab, target, Quaternion.identity);
+        Instantiate(explosionPrefab, new Vector3(target.x + 9f, target.y, target.z), Quaternion.identity);
         Invoke("telePoof", 0.1f);
     }
 
@@ -139,19 +140,6 @@ public class PlayerMovement : MonoBehaviour
         transform.position = target;
         target = transform.position;
         rb.velocity = direction * speed;
-    }
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Enemy")){
-            playerHp --;
-            Vector3 forceDirection = (transform.position - col.transform.position).normalized;
-            forceDirection.z = 0f;
-            transform.position = transform.position + forceDirection;
-            if (playerHp <= 0){
-                Destroy(gameObject);
-                }
-        }
     }
 }
 
